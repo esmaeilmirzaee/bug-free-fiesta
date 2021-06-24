@@ -20,7 +20,7 @@ func main() {
 		if userInput == "quit" {
 			break
 		} else {
-			fmt.Println(doctor.Echo())
+			fmt.Println(doctor.Response(userInput))
 		}
 	}
 }
