@@ -3,7 +3,9 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"math/rand"
 	"os"
+	"time"
 )
 
 const prompt = "and press 'ENTER' when you are ready."
@@ -16,10 +18,15 @@ func main() {
 
 	reader := bufio.NewReader(os.Stdin)
 
+	Guess(firstNumber, secondNumber, subtractionNumber, answer, reader)
+}
+
+func Guess(firstNumber, secondNumber, subtractionNumber, answer int, reader *bufio.Reader) {
 	// Introduction message
 	fmt.Println("Welcome to guessing game:")
 	fmt.Println("-------------------------")
-	fmt.Println()
+	rand.Seed(time.Now().UnixNano())
+	fmt.Println(rand.Intn(8), time.Now(), time.Now().Unix(), time.Now().UnixNano())
 
 	// The process
 	fmt.Println("Please think of a number between 1 and 10,", prompt)
