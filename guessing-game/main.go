@@ -8,9 +8,11 @@ import (
 	"time"
 )
 
+// package level variable
 const prompt = "and press 'ENTER' when you are ready."
 
 func main() {
+	// block level variables
 	firstNumber := 2
 	secondNumber := 5
 	subtractionNumber := 7
@@ -22,6 +24,8 @@ func main() {
 }
 
 func Guess(firstNumber, secondNumber, subtractionNumber, answer int, reader *bufio.Reader) {
+	// shadowing variable should be like
+	prompt := "please do not share it and press 'ENTER' when you are ready."
 	// Introduction message
 	fmt.Println("Welcome to guessing game:")
 	fmt.Println("-------------------------")
