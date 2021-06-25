@@ -1,51 +1,50 @@
 package main
 
 import (
-	"bufio"
+
 	"fmt"
-	"math/rand"
-	"os"
-	"time"
+	"log"
+	"strconv"
+
+	"github.com/eiannone/keyboard"
 )
 
-// package level variable
-const prompt = "and press 'ENTER' when you are ready."
-
 func main() {
-	// block level variables
-	firstNumber := 2
-	secondNumber := 5
-	subtractionNumber := 7
-	answer := 0
+	err := keyboard.Open()
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	reader := bufio.NewReader(os.Stdin)
+	defer func() {
+		keyboard.Close()
+	}()
 
-	Guess(firstNumber, secondNumber, subtractionNumber, answer, reader)
-}
+	fmt.Println("Press any key you like to get the ascii code, to quit press ESC.")
 
-func Guess(firstNumber, secondNumber, subtractionNumber, answer int, reader *bufio.Reader) {
-	// shadowing variable should be like
-	prompt := "please do not share it and press 'ENTER' when you are ready."
-	// Introduction message
-	fmt.Println("Welcome to guessing game:")
-	fmt.Println("-------------------------")
-	rand.Seed(time.Now().UnixNano())
-	fmt.Println(rand.Intn(8), time.Now(), time.Now().Unix(), time.Now().UnixNano())
+	for {
+		char, key, err := keyboard.GetSingleKey()
+		if err != nil {
+			log.Fatal(err)
+		}
 
-	// The process
-	fmt.Println("Please think of a number between 1 and 10,", prompt)
-	reader.ReadString('\n')
+		if char == 'q' || char == 'Q' {
+			break
+		}
 
-	fmt.Println("Multiply the thought number with", firstNumber, prompt)
-	reader.ReadString('\n')
+		coffees := make(map[int]string)
+		coffees[1] = "Latte"
+		coffees[2] = "Americano"
 
-	fmt.Println("Multiply the thought number with", secondNumber, prompt)
-	reader.ReadString('\n')
+		i, _ := strconv.Atoi(string(char))
+		t := fmt.Sprintf("Press a key to choose %q", coffees[i])
 
-	fmt.Println("Subtract the number with the ", subtractionNumber, prompt)
-	reader.ReadString('\n')
+		if key != 0 {
+			fmt.Println("You pressed", t)
+		} else {
+			fmt.Println("You pressed", t, char)
+		}
 
-	// Show the result
-	answer = firstNumber*secondNumber - subtractionNumber
-	fmt.Println(answer)
+	}
+	log.Fatal("You pressed ESC. Quiting...")
+
 }
