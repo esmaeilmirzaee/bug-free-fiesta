@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"strconv"
 
 	"github.com/eiannone/keyboard"
 )
@@ -25,15 +26,23 @@ func main() {
 			log.Fatal(err)
 		}
 
-		if key != 0 {
-			fmt.Println("You pressed", char)
-		} else {
-			fmt.Println("You pressed", char, key)
-		}
-
-		if key == keyboard.KeyEsc {
+		if char == 'q' || char == 'Q' {
 			break
 		}
+
+		coffees := make(map[int]string)
+		coffees[1] = "Latte"
+		coffees[2] = "Americano"
+
+		i, _ := strconv.Atoi(string(char))
+		t := fmt.Sprintf("Press a key to choose %q", coffees[i])
+
+		if key != 0 {
+			fmt.Println("You pressed", t)
+		} else {
+			fmt.Println("You pressed", t, char)
+		}
+
 	}
 	log.Fatal("You pressed ESC. Quiting...")
 
