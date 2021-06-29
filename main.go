@@ -8,6 +8,7 @@ import (
 	"myapp/rps"
 	"net/http"
 	"strconv"
+	"strings"
 	"text/template"
 )
 
@@ -42,10 +43,19 @@ func main() {
 	default:
 	}
 
+	myName := "Esmaeil MIRZAEE"
+	for index,letter := range myName  {
+		if index % 2 == 0 {
+			log.Println(index, strings.ToUpper(string(letter)))
+		}
+	}
+
 	http.HandleFunc("/play", playRound)
 	http.HandleFunc("/", homePage)
 	log.Println("Server is listening on", PORT)
-	http.ListenAndServe(":8000", nil)
+	if err := http.ListenAndServe(":8000", nil); err !=nil {
+		log.Println(err.Error())
+	}
 }
 
 func playRound(w http.ResponseWriter, r *http.Request) {
