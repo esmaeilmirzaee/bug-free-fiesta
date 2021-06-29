@@ -50,12 +50,24 @@ func main() {
 		}
 	}
 
+	average(rand.Intn(99), rand.Intn(99), rand.Intn(100), rand.Intn(100), rand.Intn(102))
+
 	http.HandleFunc("/play", playRound)
 	http.HandleFunc("/", homePage)
 	log.Println("Server is listening on", PORT)
 	if err := http.ListenAndServe(":8000", nil); err !=nil {
 		log.Println(err.Error())
 	}
+}
+
+func average(ages ...int) {
+	var mean int
+	for idx, age := range ages {
+		log.Println(idx, age)
+		mean += age
+	}
+	
+	log.Println("The mean is ", float64(mean) / float64(len(ages)))
 }
 
 func playRound(w http.ResponseWriter, r *http.Request) {
