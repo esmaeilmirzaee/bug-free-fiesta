@@ -2,7 +2,9 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
+	"math/rand"
 	"myapp/rps"
 	"net/http"
 	"strconv"
@@ -13,7 +15,33 @@ const (
 	PORT = 8000
 )
 
+type User struct {
+	name string
+	email string
+	password string
+}
+
+const (
+	id = iota
+)
+
 func main() {
+	// Empty literal construction syntax is {}
+	u1:=User{}
+	fmt.Printf("%+v\t %v\t %#v\n%T\n%v\n", u1, u1, u1, u1, id)
+
+	i := rand.Intn(1000)
+	switch {
+	case i != 10:
+		log.Println(i)
+		fallthrough
+	case i > 10:
+		log.Println(i)
+	case i < 10:
+		log.Println(i)
+	default:
+	}
+
 	http.HandleFunc("/play", playRound)
 	http.HandleFunc("/", homePage)
 	log.Println("Server is listening on", PORT)
