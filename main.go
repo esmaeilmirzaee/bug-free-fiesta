@@ -1,7 +1,9 @@
 package main
 
-import ("log"
-"fmt"
+import (
+	"log"
+	"fmt"
+	"reflect"
 )
 
 func main() {
@@ -21,7 +23,16 @@ func main() {
 	sliceOfFruits := fruits[1:3]
 	fmt.Printf("%T\n", sliceOfFruits)
 	log.Println(cap(sliceOfFruits))
+	log.Println("->", reflect.TypeOf(fruits))
 
 	fruits = append(fruits, "cantelope", "cherries")
 	log.Println(fruits, len(fruits), cap(fruits))
+
+	log.Println(ages())
+}
+
+func ages() (ageOfBob int, ageOfSally int) {
+	ageOfBob = 21
+	ageOfSally = 34
+	return 
 }
