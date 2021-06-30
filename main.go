@@ -2,37 +2,31 @@ package main
 
 import (
 	"log"
+	"math/rand"
+	"strconv"
 	"fmt"
-	"reflect"
+	"time"
 )
 
-func main() {
-	// Array
-	var scores [5]float64
-	names := [3]string{"Esmaeil", "Sam", "John"}
-	for _, score := range scores {
-		log.Println(score)
+func main(){
+	var scores [5]float32
+	rand.Seed(time.Now().UnixNano())
+	scores[0] = rand.Float32() * 100
+	scores[1] = rand.Float32() * 100
+	scores[2] = rand.Float32() * 100
+	scores[3] = rand.Float32() * 100
+	scores[4] = rand.Float32() * 100
+	
+	log.Printf("%.2f", scores)
+	for _, value := range scores {
+		temp := fmt.Sprintf("%.2f", value)
+		x := 3.95
+		log.Println(x)
+		
+		if tmp, err := strconv.ParseFloat(temp, 32); err == nil {
+			log.Println(tmp)
+		} else {
+			log.Println(err)
+		}	
 	}
-
-	for _, name:= range names {
-		log.Println(name)
-	}
-
-	// Slice
-	fruits := []string{"apple", "orange", "pear", "kumquat"}
-	sliceOfFruits := fruits[1:3]
-	fmt.Printf("%T\n", sliceOfFruits)
-	log.Println(cap(sliceOfFruits))
-	log.Println("->", reflect.TypeOf(fruits))
-
-	fruits = append(fruits, "cantelope", "cherries")
-	log.Println(fruits, len(fruits), cap(fruits))
-
-	log.Println(ages())
-}
-
-func ages() (ageOfBob int, ageOfSally int) {
-	ageOfBob = 21
-	ageOfSally = 34
-	return 
 }
