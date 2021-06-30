@@ -1,6 +1,8 @@
 package main
 
-import "log"
+import ("log"
+"fmt"
+)
 
 func main() {
 	// Array
@@ -14,5 +16,12 @@ func main() {
 		log.Println(name)
 	}
 
-	
+	// Slice
+	fruits := []string{"apple", "orange", "pear", "kumquat"}
+	sliceOfFruits := fruits[1:3]
+	fmt.Printf("%T\n", sliceOfFruits)
+	log.Println(cap(sliceOfFruits))
+
+	fruits = append(fruits, "cantelope", "cherries")
+	log.Println(fruits, len(fruits), cap(fruits))
 }
