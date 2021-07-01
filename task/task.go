@@ -20,8 +20,14 @@ func GenerateId() int {
 	return rand.Intn(100000000)
 }
 
+// AddTask adds a new task
 func AddTask(t Task) bool {
 	prevLength := len(tasks)
 	tasks = append(tasks, t)
 	return len(tasks) > prevLength
+}
+
+// GetTasks response with all available tasks
+func GetTasks() []Task {
+	return tasks
 }
