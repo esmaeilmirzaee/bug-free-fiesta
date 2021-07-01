@@ -2,6 +2,12 @@ package auth
 
 import "fmt"
 
+// Interface is a set of behaviours that defines a type
+type Auth interface {
+	Describe()
+}
+
+// Struct defines a set of attributes on a type
 type User struct {
 	Id                    int
 	Name, Email, Password string
