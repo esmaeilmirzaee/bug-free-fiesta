@@ -18,7 +18,7 @@ func main() {
 		scores[idx] = toFixed(value, 2)
 	}
 
-	log.Println(average(scores))
+	log.Println(scores, toFixed(average(scores), 2))
 }
 
 func round(num float64) int {
